@@ -107,3 +107,18 @@ router.delete('/tasks/:id', (req, res) => {
 });
 
 module.exports = router;
+/**
+ * GET /stats
+ * Get task statistics
+ */
+router.get('/stats', (req, res) => {
+  const total = tasks.length;
+  const completed = tasks.filter(t => t.completed).length;
+  const pending = total - completed;
+
+  res.json({
+    total,
+    completed,
+    pending
+  });
+});
